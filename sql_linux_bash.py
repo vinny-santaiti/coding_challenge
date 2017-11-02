@@ -38,5 +38,3 @@ tail -n1 file1.txt
 # awk = manipulates string patterns
 #!/bin/sh
 cat input_file.txt | (tr -d '[:punct:]' | tr ' ' '\n' | sort | uniq -c | awk '{print $2" "$1}') 
-
-# https://stackoverflow.com/questions/10552803/how-to-create-a-frequency-list-of-every-word-in-a-file
