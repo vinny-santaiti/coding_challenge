@@ -1,40 +1,19 @@
-""" string compression
-    Encode a string to as short a length as possible then decode it
+"""	string compression 
+http://www.zlib.net/ 
+better than run length encoding
 """
+import base64
+import zlib 
 
-def encode(string):
-    """string compress: "aaab" to "a3b" """
-    last = string[0]
-    result = []
-    count = 1
-    for char in string[1:]:
-        if char == last:
-            count += 1
-        else:
-            if count == 1:
-                result.append(last)
-            else:
-                result.append('{}{}'.format(last, count))
-            count = 1
-            last = char
-    if count == 1:
-        result.append(last)
-    else:
-        result.append('{}{}'.format(last, count))
-    return ''.join(result)
+def encode(data):
+    code = zlib.compress(data)
+    code = base64.encodestring(code)
+    return code
 
-def decode(string):
-    """restore original string: a4b = aaaab"""
-    result = []
-    string = list(string)
-    for i, x in enumerate(string):
-        if x.isdigit():
-            result.append(string[i-1]*int(x)) 
-        elif i != 0 and string[i-1] != x and string[i-1].isalpha():
-            result.append(string[i-1])
-    if x.isalpha():
-        result.append(x) 
-    return ''.join(result) 
+def decode(code):
+    code = base64.decodestring(code)
+    data = zlib.decompress(code)
+    return data
 
 # Run length encoding "aaaabbaaa" -> "4a2b3a"
 strings = [
