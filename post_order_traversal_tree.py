@@ -21,19 +21,19 @@ def post_order_traversal(tree_list):
     atree = list_to_tree(Tree(),tree_list)
     result = []
 
-    def postorder(tree):
+    def post_order(tree):
         """recursive implementation"""
         if tree is None:
             return
         for leaf in tree.leaf:
-            postorder(leaf)
+            post_order(leaf)
         result.append(tree.root)
     
-    postorder(atree)
+    post_order(atree)
     return result
 
 
-Tree1 = [1, [2, [4], [5], [3]]] # this is not like graphic
+Tree1 = [1, [2, [4], [5], [3]]] # this does not represent graphic
 Tree2 = ['f', ['b', ['a'], ['d', ['c'], ['e']]], ['g', ['i', ['h']]]]
 Tree3 = ['re', ['b', ['orn'], ['ate']], ['alize', ['s']], ['lief'], ['d', ['der']]]
 assert post_order_traversal(Tree1) == [4,5,2,3,1]  # right answer: [4, 5, 3, 2, 1]
