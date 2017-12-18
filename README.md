@@ -1,3 +1,3 @@
 # Coding Challenge
 
-Various algorithms coded with python 2.7.
+Algorithms coded with python
